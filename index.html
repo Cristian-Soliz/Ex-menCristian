@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Pelota Rebotando</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #da8a72;
+    }
+    #pelota {
+      width: 80px;
+      height: 20px;
+      border-radius: 0;
+      background-color: #e7db73;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="pelota"></div>
+
+  <script>
+    const pelota = document.getElementById('pelota');
+    const radio = pelota.offsetWidth / 2;  
+    let posX = window.innerWidth / 3 - radio;  
+    let posY = window.innerHeight / 3 - radio;  
+    let velocidadX = 8; 
+    let velocidadY = 8;  
+
+    function moverPelota() {
+      
+      posX += velocidadX;
+      posY += velocidadY;
+      
+      if (posX <= 0 || posX + radio * 2 >= window.innerWidth) {
+        velocidadX = -velocidadX;  
+      }
+      if (posY <= 0 || posY + radio * 2 >= window.innerHeight) {
+        velocidadY = -velocidadY; 
+      }
+
+      pelota.style.left = `${posX}px`;
+      pelota.style.top = `${posY}px`;
+    }
+
+    setInterval(moverPelota, 10);
+  
+    function cambiarDireccion(event) {
+     
+      velocidadX = (Math.random() - 0.5) * 10;  
+      velocidadY = (Math.random() - 0.5) * 10;  
+    }
+    
+    window.addEventListener('click', cambiarDireccion);
+  </script>
+</body>
+</html>
